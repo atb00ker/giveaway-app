@@ -1,6 +1,6 @@
 import { HostListener, Component, OnInit } from '@angular/core';
 import { AppRoutes } from '../app-routing.module';
-// import { AuthService } from '../auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,7 +8,7 @@ import { AppRoutes } from '../app-routing.module';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  constructor() { }
+  constructor(public authenticate: AuthService) { }
 
   // Path
   public HOME_PATH: string = '/' + AppRoutes.home;
@@ -16,6 +16,9 @@ export class NavComponent implements OnInit {
   public collapseEnabled = 'NavBar';
 
   ngOnInit() {
+    this.authenticate.getUserLoggedIn();
+    this.authenticate.checkCookiesEnabled();
+    this.enableBootstrapCollapse();
   }
 
   @HostListener('window:resize')

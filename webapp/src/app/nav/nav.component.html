@@ -15,6 +15,23 @@
                     [routerLink]=[ABOUT_PATH]>About</a>
             </li>
         </ul>
+        <ul class="navbar-nav ml-auto">
+            <li *ngIf="!authenticate.thirdCookiesEnabled && !authenticate.uidAuthUser"
+                (click)="authenticate.loginBegin('Google')" data-toggle="collapse" data-target="#collapsibleNavbar"
+                title="Please Enable Third-Party Cookies" class="nav-item">
+                <a class="disabled nav-link">Login</a>
+            </li>
+            <li *ngIf="authenticate.thirdCookiesEnabled && !authenticate.uidAuthUser" class="nav-item">
+                <a class="nav-link" data-toggle="collapse" data-target="#collapsibleNavbar"
+                    (click)="authenticate.loginBegin('Google')" href="#">Login</a>
+            </li>
+            <li *ngIf="authenticate.uidAuthUser" class="nav-item d-none d-lg-block">
+                <a class="nav-link">Welcome, {{ authenticate.emailAuthUser }}</a>
+            </li>
+            <li *ngIf="authenticate.uidAuthUser" class="nav-item">
+                <a class="nav-link" (click)="authenticate.logoutBegin()" href="#">Logout</a>
+            </li>
+        </ul>
     </div>
 </nav>
 
