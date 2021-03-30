@@ -11,6 +11,7 @@ export class AuthService {
   thirdCookiesEnabled = true;
   uidAuthUser: string = null;
   emailAuthUser: string = null;
+  authToken: string = null;
 
   // Third-Party Cookies
   checkCookiesEnabled() {
@@ -33,8 +34,12 @@ export class AuthService {
       this.auth.signInWithPopup(providerObject).then(result => {
         this.uidAuthUser = result.user.uid;
         this.emailAuthUser = result.user.email;
-        localStorage.setItem('afb_isp_uid', JSON.stringify(this.uidAuthUser));
-        localStorage.setItem('afb_isp_email', JSON.stringify(this.emailAuthUser));
+        result.user.getIdToken().then((token) => {
+          this.authToken = token;
+          localStorage.setItem('afb_giveaway_token', JSON.stringify(this.authToken));
+        });
+        localStorage.setItem('afb_giveaway_uid', JSON.stringify(this.uidAuthUser));
+        localStorage.setItem('afb_giveaway_email', JSON.stringify(this.emailAuthUser));
         location.reload();
       }).catch(error => {
         console.log(error.code);
@@ -48,15 +53,18 @@ export class AuthService {
 
 
   getUserLoggedIn() {
-    if (localStorage.getItem('afb_isp_uid')) {
-      this.uidAuthUser = JSON.parse(localStorage.getItem('afb_isp_uid'));
-      this.emailAuthUser = JSON.parse(localStorage.getItem('afb_isp_email'));
+    if (localStorage.getItem('afb_giveaway_uid')) {
+      this.uidAuthUser = JSON.parse(localStorage.getItem('afb_giveaway_uid'));
+      this.emailAuthUser = JSON.parse(localStorage.getItem('afb_giveaway_email'));
+      this.authToken = JSON.parse(localStorage.getItem('afb_giveaway_token'));
     }
   }
 
   logoutBegin() {
-    localStorage.removeItem('afb_isp_uid');
-    localStorage.removeItem('afb_isp_email');
+    this.auth.signOut();
+    localStorage.removeItem('afb_giveaway_uid');
+    localStorage.removeItem('afb_giveaway_email');
+    localStorage.removeItem('afb_giveaway_token');
     location.reload();
   }
 }

@@ -1,29 +1,29 @@
 <div class="container mt-4">
     <div *ngIf="isAllowed" class="row">
         <div *ngIf="displayStatus === 'normal'" class="display-status-normal col-12">
-            ABV
+            TEST1
         </div>
         <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
-            ABV
+            TEST2
         </div>
         <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
-            ABV
+            TEST3
         </div>
         <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
-            ABV
+            TEST4
         </div>
     </div>
     <div *ngIf="!isAllowed" class="row">
         <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
             Loading page...
         </div>
-        <div *ngIf="displayStatus === 'error'" class="display-status-progress col-12">
+        <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
             Refresh page after obtaining permission.
         </div>
     </div>
 </div>
 
-<div class="container mt-5">
+<div *ngIf="!isAllowed && displayStatus === 'error'" class="container mt-5">
     <div class="row">
         <div class="col-md-1 d-none d-md-block"></div>
         <div class="col-md-5 d-none d-md-flex flex-wrap align-items-center">
