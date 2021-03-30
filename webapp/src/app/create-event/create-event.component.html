@@ -1,0 +1,53 @@
+<div class="container mt-4">
+    <div *ngIf="isAllowed" class="row">
+        <div *ngIf="displayStatus === 'normal'" class="display-status-normal col-12">
+            ABV
+        </div>
+        <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
+            ABV
+        </div>
+        <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
+            ABV
+        </div>
+        <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
+            ABV
+        </div>
+    </div>
+    <div *ngIf="!isAllowed" class="row">
+        <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
+            Loading page...
+        </div>
+        <div *ngIf="displayStatus === 'error'" class="display-status-progress col-12">
+            Refresh page after obtaining permission.
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-1 d-none d-md-block"></div>
+        <div class="col-md-5 d-none d-md-flex flex-wrap align-items-center">
+            <img src="../../assets/images/stop-icon.jpg" alt="site-description" class="img-fluid">
+            <div class='image-attribution'>
+                <a target='_blank' href='https://www.freepik.com/vectors/people'>Image by pch.vector
+                    (freepik.com)
+                </a>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-12">
+            <h3>You don't have the required permissions!</h3>
+            <br>
+            <p>
+                We don't want scammers to misuse this site,
+                hence only verified accounts are allowed to create a giveaway.
+            </p>
+            <p>
+                To verify your account, please send me an email at
+                <span class='text-primary'>{{contactAuthorText}}</span>
+                which has information that allows me to establish your legitimacy.
+                <br>
+                (Example: YouTube channel or Twitter handle etc)
+            </p>
+        </div>
+    </div>
+</div>

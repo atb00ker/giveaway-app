@@ -14,6 +14,15 @@
                 <a class="nav-link" data-toggle="collapse" data-target="#collapsibleNavbar"
                     [routerLink]=[ABOUT_PATH]>About</a>
             </li>
+            <li *ngIf="authenticate.uidAuthUser" class="d-none d-md-flex nav-item">
+                <a [routerLink]=[CREATE_EVENT_PATH]>
+                    <button aria-label="Create Giveaway" type="button" class="btn btn-primary">Create Giveaway</button>
+                </a>
+            </li>
+            <li *ngIf="authenticate.uidAuthUser" class="d-block d-md-none nav-item" data-toggle="collapse"
+                data-target="#collapsibleNavbar">
+                <a class="nav-link" [routerLink]=[CREATE_EVENT_PATH]>Create Giveaway</a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li *ngIf="!authenticate.thirdCookiesEnabled && !authenticate.uidAuthUser"

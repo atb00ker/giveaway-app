@@ -13,6 +13,7 @@ export class NavComponent implements OnInit {
   // Path
   public HOME_PATH: string = '/' + AppRoutes.home;
   public ABOUT_PATH: string = '/' + AppRoutes.about;
+  public CREATE_EVENT_PATH: string = '/' + AppRoutes.createEvent;
   public collapseEnabled = 'NavBar';
 
   ngOnInit() {

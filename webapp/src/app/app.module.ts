@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-// Giveaway
-import { AppRoutingModule } from './app-routing.module';
+// Giveaway Organizer
+import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { NavComponent } from './nav/nav.component';
-import { RoutedComponents } from './app-routing.module';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -33,12 +34,19 @@ export class AppComponent {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
     AngularFireAnalyticsModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    ScreenTrackingService,
+    UserTrackingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
