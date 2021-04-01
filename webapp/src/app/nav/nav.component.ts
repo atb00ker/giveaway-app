@@ -1,6 +1,7 @@
 import { HostListener, Component, OnInit } from '@angular/core';
 import { AppRoutes } from '../app-routing.module';
 import { AuthService } from '../auth.service';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,17 +9,21 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  constructor(public authenticate: AuthService) { }
+
+  constructor(private auth: AuthService, public helper: HelperService) { }
 
   // Path
   public HOME_PATH: string = '/' + AppRoutes.home;
   public ABOUT_PATH: string = '/' + AppRoutes.about;
   public CREATE_EVENT_PATH: string = '/' + AppRoutes.createEvent;
+  // Path
   public collapseEnabled = 'NavBar';
+  public userInfo = 'NavBar';
 
   ngOnInit() {
-    this.authenticate.getUserLoggedIn();
-    this.authenticate.checkCookiesEnabled();
+    this.helper.loggedInUser.subscribe(email => this.userInfo = email);
+    this.auth.checkCookiesEnabled();
+    this.auth.isLoggedIn();
     this.enableBootstrapCollapse();
   }
 
@@ -29,5 +34,13 @@ export class NavComponent implements OnInit {
     } else {
       this.collapseEnabled = 'collapsibleNavbar';
     }
+  }
+
+  beginLogin() {
+    this.auth.loginBegin('Google');
+  }
+
+  beginLogout() {
+    this.auth.logoutBegin()
   }
 }

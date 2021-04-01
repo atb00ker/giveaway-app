@@ -1,0 +1,93 @@
+<div class="container mt-4">
+    <div *ngIf="isAllowed" class="row">
+        <div *ngIf="displayStatus === 'normal'" class="display-status-normal col-12">
+            Please enter the information below to participate in the giveaway!
+        </div>
+        <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
+            Oops! There was some problem, please re-login. <br>
+            If the problem persists, contact me at {{ contactAuthorText }}.
+        </div>
+        <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
+            Success: Participation confirmed!
+        </div>
+        <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
+            Sending request to server...
+        </div>
+    </div>
+    <div *ngIf="!isAllowed" class="row">
+        <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
+            Loading...
+        </div>
+        <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
+            You need to login to participate in the event.
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!isAllowed && displayStatus !== 'progress'" class="container mt-5">
+    <div class="row">
+        <div class="col-md-1 d-none d-md-block"></div>
+        <div class="col-md-5 d-none d-md-flex flex-wrap align-items-center">
+            <img src="../../assets/images/stop-icon-small.jpg" alt="site-description" class="img-fluid">
+            <div class='image-attribution'>
+                <a target='_blank' href='https://www.freepik.com/vectors/people'>Image by pch.vector
+                    (freepik.com)
+                </a>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-12">
+            <h3>You don't have the required permissions!</h3>
+            <br>
+            <p>
+                We don't want scammers to misuse this site,
+                hence only verified accounts are allowed to create a giveaway.
+            </p>
+            <p>
+                To verify your account, please send me an email at
+                <span class='text-primary'>{{contactAuthorText}}</span>
+                which has information that allows me to establish your legitimacy.
+                <br>
+                (Example: YouTube channel or Twitter handle etc)
+            </p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isAllowed" class="container mt-5">
+    <form class="container mt-4" [formGroup]="addParticipantForm" (ngSubmit)="addParticipantSubmit()">
+        <!-- Name -->
+        <div class="row">
+            <div [ngClass]="{
+            'd-none': addParticipantForm.get('name').valid || addParticipantForm.get('name').untouched,
+            'text-danger col-12': true}">
+                *Error: A value is required.
+            </div>
+            <span class="col-sm-12 col-md-6 col-lg-3">
+                <label for="name-input"> Your Name: </label>
+            </span>
+            <input data-lpignore="true" name="name-input" aria-label="Enter Name" id="name-input"
+                placeholder="Bruce Wayne" type="text" formControlName="name" [ngClass]="{
+            'text-danger error-input': addParticipantForm.get('name').invalid && addParticipantForm.get('name').touched,
+            'add-input-common col-sm-12 col-md-6 col-lg-9': true}">
+        </div>
+
+        <!-- Message (Optional) -->
+        <div class="row">
+            <span class="col-sm-12 col-md-6 col-lg-3">
+                <label for="message-input"> Message (Optional): </label>
+            </span>
+            <input data-lpignore="true" class="add-input-common col-sm-12 col-md-6 col-lg-9" name="message-input"
+                aria-label="Message (Optional)" id="message-input" placeholder="I love your channel!" type="text"
+                formControlName="message">
+        </div>
+
+        <!-- Submit -->
+        <div class="row">
+            <div class="mt-2 col-sm-12 col-md-10 col-lg-9">
+                <button aria-label="Submit Form" title="Submit Entry for Giveaway!"
+                    [disabled]="addParticipantForm.invalid || disableSubmitBtn" type="submit" class="btn btn-primary">
+                    Submit </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -7,7 +7,6 @@ export const firebase = {
 };
 
 export const app = {
-    createGiveaway: 'https://asia-northeast1-atb00ker-apps.cloudfunctions.net/createGiveaway',
     databaseUrl: 'https://atb00ker-apps.firebaseio.com/',
-    contactAuthorText: 'ajay30in+giveawayapp[at]gmail[dot]com',
+    contactAuthorText: 'ajay39in+giveawayapp[at]gmail[dot]com',
 }

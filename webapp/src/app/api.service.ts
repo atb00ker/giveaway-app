@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { HelperService } from './helper.service';
+import { User, Event, Participant } from './app.interface';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { DomSanitizer } from '@angular/platform-browser';
-import { environment } from '../environments/environment';
+import firebase from 'firebase/app';
+import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 
-@Injectable()
+
+@Injectable({ providedIn: 'root' })
 export class ApiService {
 
-  private databasebaseUrl = environment.app.databaseUrl;
+  constructor(private firestore: AngularFirestore, private helper: HelperService) { }
 
-  private jsonHttpheaders = new HttpHeaders({ 'Content-type': 'application/json' });
-  constructor(private http: HttpClient, public sanitizer: DomSanitizer) { }
+  checkCreateAllowed(email: string): Observable<DocumentSnapshot<User>> {
+    return this.firestore.doc<User>(`giveaway/users/priviledged/${this.helper.md5Hash(email)}`).get();
+  }
 
-  checkCreateAllowed(userId, authToken): Observable<boolean> {
-    const path = `giveaway/users/${userId}/organizer.json?auth=${authToken}`;
-    return this.http.get<boolean>(this.databasebaseUrl + path, { headers: this.jsonHttpheaders });
+  createEvent(email: string, name: string, randomEventId: string): Promise<void> {
+    const event: Event = { name, created: new Date() };
+    return this.firestore.doc(`giveaway/events/${email}/${randomEventId}`).set(event);
+  }
+
+  addParticipant(participant: Participant, code: string, eventId: string) {
+    const hashedEmail = this.helper.md5Hash(participant.email),
+      path = `giveaway/events/${code}/${eventId}/participants/${hashedEmail}`;
+    return this.firestore.doc(path).set(participant);
   }
 }

@@ -2,24 +2,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+import { HelperService } from './helper.service';
+import { first } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  constructor(public auth: AngularFireAuth) { }
-
-  thirdCookiesEnabled = true;
-  uidAuthUser: string = null;
-  emailAuthUser: string = null;
-  authToken: string = null;
+  constructor(private auth: AngularFireAuth, private helper: HelperService) { }
 
   // Third-Party Cookies
   checkCookiesEnabled() {
     const receiveMessage = evt => {
       if (evt.data === 'MM:3PCunsupported') {
-        this.thirdCookiesEnabled = false;
+        this.helper.thirdCookiesEnabled = false;
       } else if (evt.data === 'MM:3PCsupported') {
-        this.thirdCookiesEnabled = true;
+        this.helper.thirdCookiesEnabled = true;
       }
     };
     window.addEventListener('message', receiveMessage, false);
@@ -27,44 +24,34 @@ export class AuthService {
 
   // Firebase Authentication
   loginBegin(provider) {
-    if (this.thirdCookiesEnabled === false) {
+    if (this.helper.thirdCookiesEnabled === false) {
       alert('Please enable third-party cookies to login!');
     } else {
-      const providerObject = this.getProviderObject(provider);
-      this.auth.signInWithPopup(providerObject).then(result => {
-        this.uidAuthUser = result.user.uid;
-        this.emailAuthUser = result.user.email;
-        result.user.getIdToken().then((token) => {
-          this.authToken = token;
-          localStorage.setItem('afb_giveaway_token', JSON.stringify(this.authToken));
-        });
-        localStorage.setItem('afb_giveaway_uid', JSON.stringify(this.uidAuthUser));
-        localStorage.setItem('afb_giveaway_email', JSON.stringify(this.emailAuthUser));
-        location.reload();
-      }).catch(error => {
-        console.log(error.code);
+      const providerObject = this._getProviderObject(provider);
+      this.auth.setPersistence('local').then(() => {
+        this.auth.signInWithPopup(providerObject)
+          .then(() => this.isLoggedIn())
+          .catch(error => console.log(error.code));
       });
     }
   }
 
-  getProviderObject(provider) {
+  private _getProviderObject(provider) {
     if (provider === 'Google') { return new firebase.auth.GoogleAuthProvider(); }
   }
 
-
-  getUserLoggedIn() {
-    if (localStorage.getItem('afb_giveaway_uid')) {
-      this.uidAuthUser = JSON.parse(localStorage.getItem('afb_giveaway_uid'));
-      this.emailAuthUser = JSON.parse(localStorage.getItem('afb_giveaway_email'));
-      this.authToken = JSON.parse(localStorage.getItem('afb_giveaway_token'));
-    }
+  async isLoggedIn() {
+    const user = await this.auth.authState.pipe(first()).toPromise();
+    if (user)
+      this.helper.loggedInUser.next(user.email);
+    else
+      this.helper.loggedInUser.next(null);
   }
 
-  logoutBegin() {
+  logoutBegin(reload = true) {
     this.auth.signOut();
-    localStorage.removeItem('afb_giveaway_uid');
-    localStorage.removeItem('afb_giveaway_email');
-    localStorage.removeItem('afb_giveaway_token');
-    location.reload();
+    this.helper.loggedInUser.next(null);
+    if (reload)
+      location.reload();
   }
 }

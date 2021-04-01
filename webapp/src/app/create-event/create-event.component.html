@@ -1,16 +1,18 @@
 <div class="container mt-4">
     <div *ngIf="isAllowed" class="row">
         <div *ngIf="displayStatus === 'normal'" class="display-status-normal col-12">
-            TEST1
+            Please enter the event name and submit to create a new event!
         </div>
         <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
-            TEST2
+            Oops! There was some problem creating the event, re-login. <br>
+            If the problem persists, contact me at {{ contactAuthorText }}.
         </div>
         <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
-            TEST3
+            Event created successfully, share the link: <br>
+            {{ eventUrl }}
         </div>
         <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
-            TEST4
+            Sending request to server...
         </div>
     </div>
     <div *ngIf="!isAllowed" class="row">
@@ -18,7 +20,9 @@
             Loading page...
         </div>
         <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
-            Refresh page after obtaining permission.
+            Refresh the page after obtaining the required permission. If you have the permissions and you see this
+            error, re-login. <br>
+            If the problem persists, contact me at {{ contactAuthorText }}.
         </div>
     </div>
 </div>
@@ -27,7 +31,8 @@
     <div class="row">
         <div class="col-md-1 d-none d-md-block"></div>
         <div class="col-md-5 d-none d-md-flex flex-wrap align-items-center">
-            <img src="../../assets/images/stop-icon.jpg" alt="site-description" class="img-fluid">
+            <img src="../../assets/images/stop-icon-small.jpg" alt="Error: Need permission to create event"
+                class="img-fluid">
             <div class='image-attribution'>
                 <a target='_blank' href='https://www.freepik.com/vectors/people'>Image by pch.vector
                     (freepik.com)
@@ -49,5 +54,25 @@
                 (Example: YouTube channel or Twitter handle etc)
             </p>
         </div>
+    </div>
+</div>
+
+<div *ngIf="isAllowed" class="container mt-5">
+    <div class="row">
+        <form #postalForm="ngForm" id="event-name-container" (ngSubmit)="createEventClick()">
+            <span>
+                <label for="event-name-input"> Enter Event Name: </label>
+            </span>
+            <input name="event-name-input" aria-label="Event Name" id="event-name-input"
+                placeholder="Christmas Steam Giveaway" type="text" [formControl]="eventName"
+                [ngClass]="{'text-danger error-input': eventName.invalid && eventName.touched}">
+            <button aria-label="Create Giveaway" title="Enter a name and press to create an event"
+                [disabled]="eventName.invalid || disableCreateBtn" type="submit" id="event-name-button"
+                class="btn btn-primary">
+                <svg class="icon-white" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z" />
+                </svg>
+            </button>
+        </form>
     </div>
 </div>

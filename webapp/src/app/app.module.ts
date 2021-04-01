@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 // Giveaway Organizer
@@ -39,6 +40,7 @@ export class AppComponent {
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     AngularFireAuthGuardModule,
     AngularFireAnalyticsModule
   ],

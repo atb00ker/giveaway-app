@@ -1,9 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+a { color: #013f82; }
+label { margin: 0; }
+.row { margin: auto! important; }
+
+.icon-white {
+  fill: white;
+}
+
 .image-attribution {
     font-size: 10px;
-    text-align: right;
 }
+
+/* Display Status Section Styles */
 
 .display-status {
     border: 2px #999 solid;
