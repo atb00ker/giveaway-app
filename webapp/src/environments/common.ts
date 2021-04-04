@@ -9,4 +9,5 @@ export const firebase = {
 export const app = {
     databaseUrl: 'https://atb00ker-apps.firebaseio.com/',
     contactAuthorText: 'ajay39in+giveawayapp[at]gmail[dot]com',
+    contactAuthor: 'ajay39in+giveawayapp@gmail.com'
 }

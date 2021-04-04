@@ -5,7 +5,8 @@
         </div>
         <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
             Oops! There was some problem, please re-login. <br>
-            If the problem persists, contact me at {{ contactAuthorText }}.
+            If the problem persists, contact me at {{ contactAuthorText }}
+            <email-copy-icon style="fill:#dc3545;"></email-copy-icon>.
         </div>
         <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
             Success: Participation confirmed!
@@ -28,12 +29,7 @@
     <div class="row">
         <div class="col-md-1 d-none d-md-block"></div>
         <div class="col-md-5 d-none d-md-flex flex-wrap align-items-center">
-            <img src="../../assets/images/login-required-small.png" alt="Error: You need to login" class="img-fluid">
-            <div class='image-attribution'>
-                <a target='_blank' href='https://www.freepik.com/vectors/website'>Image by stories
-                    (freepik.com)
-                </a>
-            </div>
+            <img src="../../assets/images/login-required.svg" alt="Error: You need to login" class="img-fluid">
         </div>
         <div class="col-md-5 col-sm-12">
             <h3>Login required!</h3>

@@ -10,6 +10,11 @@ export class NgbToastsService {
     this.toasts.push({ textOrTemplate, ...options });
   }
 
+  showClipboardToast() {
+    this.showToast('Copied to clipboard!',
+      { classname: 'bg-success text-light', delay: 5000 });
+  }
+
   removeToast(removeToast) {
     this.toasts = this.toasts.filter(toast => toast !== removeToast);
   }

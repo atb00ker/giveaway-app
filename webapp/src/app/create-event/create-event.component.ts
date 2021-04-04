@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Title } from "@angular/platform-browser";
 import { FormControl, Validators } from '@angular/forms';
+import { ClipboardService } from 'ngx-clipboard';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 // Giveaway Organizer
 import { ApiService } from '../api.service';
 import { HelperService } from '../helper.service';
 import { User } from '../app.interface';
+import { NgbToastsService } from '../ngbootstrap/ngtoasts.service';
 
 @Component({
   selector: 'app-create-event',
@@ -26,7 +28,8 @@ export class CreateEventComponent implements OnInit {
   public winnerUrl: string;
   private ngUnsubscribe = new Subject();
 
-  constructor(private titleService: Title, private api: ApiService, private helper: HelperService) {
+  constructor(private titleService: Title, private clipboard: ClipboardService,
+    private api: ApiService, public helper: HelperService, private toaster: NgbToastsService) {
     this.titleService.setTitle("Giveaway! | Create new giveaway");
   }
 
@@ -72,6 +75,11 @@ export class CreateEventComponent implements OnInit {
         this.displayStatus = 'error';
       })
       .finally(() => this.disableCreateBtn = false)
+  }
+
+  copiedToClipboard(text: string) {
+    this.clipboard.copyFromContent(text);
+    this.toaster.showClipboardToast();
   }
 
   ngOnDestroy() {

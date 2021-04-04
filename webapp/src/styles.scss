@@ -1,7 +1,5 @@
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
-
 /* You can add global styles to this file, and also import other style files */
+
 body {
   margin: 0;
   overflow-x: hidden;
@@ -11,12 +9,47 @@ a { color: #013f82; }
 label { margin: 0; }
 .row { margin: auto! important; }
 
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+/* Global Fonts */
+
+@font-face {
+    font-family: 'Kalam';
+    src: url('./assets/Kalam-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: 700;
+}
+
+@font-face {
+    font-family: 'Kalam';
+    src: url('./assets/Kalam-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: 400;
+}
+
+#page-title {
+    font-family: 'Kalam', cursive;
+    font-size: 75px;
+    font-weight: 700;
+}
+
+
+/* Common Styles */
+
 .icon-white {
   fill: white;
 }
 
 .image-attribution {
     font-size: 10px;
+}
+
+.clipboard-button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    fill: inherit;
 }
 
 /* Display Status Section Styles */
@@ -53,6 +86,7 @@ label { margin: 0; }
 }
 
 /* Global Toast location */
+
 .ngb-toasts {
     top: 60px !important;
 }

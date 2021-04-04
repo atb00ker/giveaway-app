@@ -5,12 +5,11 @@
         </div>
         <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
             Oops! There was some problem creating the event, re-login. <br>
-            If the problem persists, contact me at {{ contactAuthorText }}.
+            If the problem persists, contact me at {{ contactAuthorText }}
+            <email-copy-icon style="fill:#dc3545;"></email-copy-icon>.
         </div>
         <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
-            Event created successfully,
-            <br> Share link: {{ eventUrl }}
-            <br> Pick winner: {{ winnerUrl }}
+            Event created successfully!
         </div>
         <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
             Sending request to server...
@@ -23,7 +22,8 @@
         <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
             Refresh the page after obtaining the required permission. If you have the permissions and you see this
             error, re-login. <br>
-            If the problem persists, contact me at {{ contactAuthorText }}.
+            If the problem persists, contact me at {{ contactAuthorText }}
+            <email-copy-icon style="fill:#dc3545;"></email-copy-icon>.
         </div>
     </div>
 </div>
@@ -49,7 +49,9 @@
             </p>
             <p>
                 To verify your account, please send me an email at
-                <span class='text-primary'>{{contactAuthorText}}</span>
+                <span class='text-primary'>{{ contactAuthorText }}
+                    <email-copy-icon style="fill:#007bff;"></email-copy-icon>
+                </span>
                 which has information that allows me to establish your legitimacy.
                 <br>
                 (Example: YouTube channel or Twitter handle etc)
@@ -75,5 +77,39 @@
                 </svg>
             </button>
         </form>
+    </div>
+</div>
+<div *ngIf="isAllowed && winnerUrl && eventUrl" class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>Share link</td>
+                        <td>
+                            <button (click)="copiedToClipboard(eventUrl)" class="clipboard-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                </svg>
+                            </button>
+                            {{ eventUrl }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pick winner</td>
+                        <td>
+                            <button (click)="copiedToClipboard(winnerUrl)" class="clipboard-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                </svg>
+                            </button>
+                            {{ winnerUrl }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

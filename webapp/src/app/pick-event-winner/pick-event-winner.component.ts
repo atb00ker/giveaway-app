@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from '../../environments/environment';
 import { Title } from "@angular/platform-browser";
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ClipboardService } from 'ngx-clipboard';
+// Giveaway Organizer
+import { environment } from '../../environments/environment';
 import { ApiService } from '../api.service';
 import { HelperService } from '../helper.service';
 import { Participant } from '../app.interface';
-import { ClipboardService } from 'ngx-clipboard';
 import { NgbToastsService } from '../ngbootstrap/ngtoasts.service';
 
 @Component({
@@ -28,8 +29,8 @@ export class PickEventWinnerComponent implements OnInit {
   private ngUnsubscribe = new Subject();
 
   constructor(private titleService: Title, private route: ActivatedRoute,
-    private api: ApiService, private helper: HelperService,
-    private clipboard: ClipboardService, private bootstrap: NgbToastsService) {
+    private api: ApiService, public helper: HelperService,
+    private clipboard: ClipboardService, private toaster: NgbToastsService) {
     this.titleService.setTitle("Giveaway! | Pick a winner!");
   }
 
@@ -55,6 +56,10 @@ export class PickEventWinnerComponent implements OnInit {
         response => {
           response.docs.map(record => this.participantList.push(record.data()));
           this.displayStatus = 'normal';
+          if (this.participantList.length === 0) {
+            this.displayStatus = 'error';
+            setTimeout(() => this.getAllParticipants(), 5000);
+          }
           this.isAllowed = true;
         },
         error => {
@@ -64,9 +69,20 @@ export class PickEventWinnerComponent implements OnInit {
       );
   }
 
+  pickRandomWinner() {
+    this.displayStatus = 'progress';
+    if (this.participantList.length > 0) {
+      this._pickRandomWinner();
+      this.displayStatus = 'success';
+    } else {
+      this.getAllParticipants();
+      this.displayStatus = 'error';
+    }
+  }
+
   // Do not remove detailed documentation here, it is linked in about page to
   // explain how winner is drawn.
-  pickRandomWinner() {
+  _pickRandomWinner() {
     // Variable `this.participantList` contains the list of all the participants.
     // The operation `Math.random() * this.participantList.length` returns a random number
     // in the length of the list. if the random number is 5.5 it is converted to 5.
@@ -78,15 +94,11 @@ export class PickEventWinnerComponent implements OnInit {
     // If the console output matches and this code is not manipulated, then we can conclude
     // that winner was reasonably likely randomly chosen.
     console.info(`Picked winner: ${this.winner.name}`);
-    this.displayStatus = 'success';
   }
 
   copyEmailToClipboard() {
     this.clipboard.copyFromContent(this.winner.email);
-    this.bootstrap.showToast('Copied to clipboard', {
-      classname: 'bg-success text-light',
-      delay: 5000
-    });
+    this.toaster.showClipboardToast();
   }
 
   ngOnDestroy() {

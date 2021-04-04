@@ -4,8 +4,10 @@
             Ready to pick a winner...
         </div>
         <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
-            Oops! There was some problem picking the winner, please re-login. <br>
-            If the problem persists, contact me at {{ contactAuthorText }}.
+            Oops! There was some problem finding participants, it's possible that no one has
+            filled the event form yet. <br>
+            Wait & refresh. If the problem persists, contact me at {{ contactAuthorText }}
+            <email-copy-icon style="fill:#dc3545;"></email-copy-icon>.
         </div>
         <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
             🎉 Congratulations {{ winner?.name || '?????????????' }}! 🎉
@@ -20,7 +22,8 @@
         </div>
         <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
             If you think this is a mistake, please re-login. <br>
-            If the problem persists, contact me at {{ contactAuthorText }}.
+            If the problem persists, contact me at {{ contactAuthorText }}
+            <email-copy-icon style="fill:#dc3545;"></email-copy-icon>.
         </div>
     </div>
 </div>
@@ -55,7 +58,7 @@
                 <thead>
                     <tr>
                         <th class="winner-cell">Name</th>
-                        <th class="winner-info-cell">{{ winner?.name || '?????????????' }}</th>
+                        <th class="winner-info-cell">{{ winner?.name || '??????????????' }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,7 +66,7 @@
                         <td class="winner-cell">Email</td>
                         <td class="winner-info-cell">
                             *********************
-                            <button (click)="copyEmailToClipboard()" id="clipboard-button" *ngIf="winner?.email">
+                            <button (click)="copyEmailToClipboard()" class="clipboard-button" *ngIf="winner?.email">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="24" viewBox="0 0 24 24">
                                     <path
                                         d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -84,5 +87,3 @@
         </div>
     </div>
 </div>
-
-<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

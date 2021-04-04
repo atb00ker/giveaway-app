@@ -16,7 +16,7 @@ import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './auth.service';
-// Custom Pipes
+import { CopyIconComponent } from './app.templates';
 import { JsonParsePipe } from './pipes/jsonparse.pipe'
 
 
@@ -24,6 +24,7 @@ import { JsonParsePipe } from './pipes/jsonparse.pipe'
   selector: 'app-root',
   template: `
   <app-nav></app-nav>
+  <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
   <router-outlet></router-outlet>
   `
 })
@@ -37,6 +38,7 @@ export class AppComponent {
     AppComponent,
     NavComponent,
     NgbToastsComponent,
+    CopyIconComponent,
     JsonParsePipe,
     RoutedComponents
   ],
