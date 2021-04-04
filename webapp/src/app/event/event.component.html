@@ -28,26 +28,24 @@
     <div class="row">
         <div class="col-md-1 d-none d-md-block"></div>
         <div class="col-md-5 d-none d-md-flex flex-wrap align-items-center">
-            <img src="../../assets/images/stop-icon-small.jpg" alt="site-description" class="img-fluid">
+            <img src="../../assets/images/login-required-small.png" alt="Error: You need to login" class="img-fluid">
             <div class='image-attribution'>
-                <a target='_blank' href='https://www.freepik.com/vectors/people'>Image by pch.vector
+                <a target='_blank' href='https://www.freepik.com/vectors/website'>Image by stories
                     (freepik.com)
                 </a>
             </div>
         </div>
         <div class="col-md-5 col-sm-12">
-            <h3>You don't have the required permissions!</h3>
+            <h3>Login required!</h3>
             <br>
             <p>
-                We don't want scammers to misuse this site,
-                hence only verified accounts are allowed to create a giveaway.
+                Only logged-in users are allowed to participate in an event.
+                <br>
+                Once you login, you'll need to provide your preferred name (or alias) to
+                participate, your name & email will be shared with the event host!
             </p>
             <p>
-                To verify your account, please send me an email at
-                <span class='text-primary'>{{contactAuthorText}}</span>
-                which has information that allows me to establish your legitimacy.
-                <br>
-                (Example: YouTube channel or Twitter handle etc)
+                Currently only Google account login is supported, more will be added in the future.
             </p>
         </div>
     </div>
@@ -76,9 +74,9 @@
             <span class="col-sm-12 col-md-6 col-lg-3">
                 <label for="message-input"> Message (Optional): </label>
             </span>
-            <input data-lpignore="true" class="add-input-common col-sm-12 col-md-6 col-lg-9" name="message-input"
+            <textarea data-lpignore="true" class="add-input-common col-sm-12 col-md-6 col-lg-9" name="message-input"
                 aria-label="Message (Optional)" id="message-input" placeholder="I love your channel!" type="text"
-                formControlName="message">
+                formControlName="message"></textarea>
         </div>
 
         <!-- Submit -->

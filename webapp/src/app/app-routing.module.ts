@@ -6,15 +6,16 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { EventComponent } from './event/event.component';
+import { PickEventWinnerComponent } from './pick-event-winner/pick-event-winner.component';
 
 export class AppRoutes {
   public static home = 'home';
   public static about = 'about';
   public static createEvent = 'create-event';
   public static event = 'giveaway';
+  public static pickEventWinner = 'pick-winner';
 }
 
-// TODO: Not working in prod: https://github.com/angular/angularfire/issues/2114
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo([AppRoutes.home]);
 
 const routes: Routes = [
@@ -25,11 +26,13 @@ const routes: Routes = [
     path: AppRoutes.createEvent, component: CreateEventComponent,
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToHome }
   },
+  { path: AppRoutes.pickEventWinner, component: PickEventWinnerComponent },
   { path: AppRoutes.event, component: EventComponent },
   { path: '**', component: HomeComponent },
 ];
 
-export const RoutedComponents = [HomeComponent, AboutComponent, CreateEventComponent, EventComponent];
+export const RoutedComponents = [HomeComponent, AboutComponent, CreateEventComponent,
+  EventComponent, PickEventWinnerComponent];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

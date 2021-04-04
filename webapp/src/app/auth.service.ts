@@ -31,7 +31,7 @@ export class AuthService {
       this.auth.setPersistence('local').then(() => {
         this.auth.signInWithPopup(providerObject)
           .then(() => this.isLoggedIn())
-          .catch(error => console.log(error.code));
+          .catch(error => console.error(error.code));
       });
     }
   }

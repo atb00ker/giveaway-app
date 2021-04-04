@@ -23,6 +23,7 @@ export class CreateEventComponent implements OnInit {
   public disableCreateBtn = false;
   public user: User;
   public eventUrl: string;
+  public winnerUrl: string;
   private ngUnsubscribe = new Subject();
 
   constructor(private titleService: Title, private api: ApiService, private helper: HelperService) {
@@ -63,6 +64,7 @@ export class CreateEventComponent implements OnInit {
     this.api.createEvent(email, this.eventName.value, randomEventId)
       .then(() => {
         this.eventUrl = `${location.origin}/giveaway?code=${email}&event=${randomEventId}`;
+        this.winnerUrl = `${location.origin}/pick-winner?code=${email}&event=${randomEventId}`;
         this.displayStatus = 'success';
       })
       .catch(error => {

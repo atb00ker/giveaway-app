@@ -8,11 +8,17 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { ClipboardModule } from 'ngx-clipboard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbToastsComponent } from './ngbootstrap/ngbtoasts.compontent';
 // Giveaway Organizer
 import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './auth.service';
+// Custom Pipes
+import { JsonParsePipe } from './pipes/jsonparse.pipe'
+
 
 @Component({
   selector: 'app-root',
@@ -30,6 +36,8 @@ export class AppComponent {
   declarations: [
     AppComponent,
     NavComponent,
+    NgbToastsComponent,
+    JsonParsePipe,
     RoutedComponents
   ],
   imports: [
@@ -42,7 +50,9 @@ export class AppComponent {
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireAuthGuardModule,
-    AngularFireAnalyticsModule
+    AngularFireAnalyticsModule,
+    ClipboardModule,
+    NgbModule
   ],
   providers: [
     AuthService,

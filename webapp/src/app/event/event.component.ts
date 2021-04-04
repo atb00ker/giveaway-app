@@ -12,7 +12,8 @@ import { Participant } from '../app.interface';
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss']
+  styleUrls: ['./event.component.scss'],
+  providers: [ApiService]
 })
 export class EventComponent implements OnInit {
 
@@ -56,10 +57,11 @@ export class EventComponent implements OnInit {
   addParticipantSubmit() {
     this.displayStatus = 'progress';
     this.disableSubmitBtn = true;
+    console.log(this.addParticipantForm.value.message);
     let participant: Participant = {
       name: this.addParticipantForm.value.name,
       email: this.helper.loggedInUser.value,
-      message: this.addParticipantForm.value.message
+      message: JSON.stringify(this.addParticipantForm.value.message)
     }
     this.api.addParticipant(participant, this.organizer, this.eventId)
       .then(() => {

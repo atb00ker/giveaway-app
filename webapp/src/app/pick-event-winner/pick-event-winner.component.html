@@ -1,0 +1,88 @@
+<div class="container mt-4">
+    <div *ngIf="isAllowed" class="row">
+        <div *ngIf="displayStatus === 'normal'" class="display-status-normal col-12">
+            Ready to pick a winner...
+        </div>
+        <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
+            Oops! There was some problem picking the winner, please re-login. <br>
+            If the problem persists, contact me at {{ contactAuthorText }}.
+        </div>
+        <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
+            🎉 Congratulations {{ winner?.name || '?????????????' }}! 🎉
+        </div>
+        <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
+            Rolling the dice...
+        </div>
+    </div>
+    <div *ngIf="!isAllowed" class="row">
+        <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
+            Loading page...
+        </div>
+        <div *ngIf="displayStatus === 'error'" class="display-status-error col-12">
+            If you think this is a mistake, please re-login. <br>
+            If the problem persists, contact me at {{ contactAuthorText }}.
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!isAllowed && displayStatus === 'error'" class="container mt-5">
+    <div class="row">
+        <div class="col-md-1 d-none d-md-block"></div>
+        <div class="col-md-5 d-none d-md-flex flex-wrap align-items-center">
+            <img src="../../assets/images/organizer-image-small.jpg" alt="Error: Need permission to create event"
+                class="img-fluid">
+            <div class='image-attribution'>
+                <a target='_blank' href='https://www.freepik.com/vectors/light'>Image by upklyak
+                    (freepik.com)
+                </a>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-12">
+            <h3>Only event creator is allowed!</h3>
+            <br>
+            <p>
+                You can only pick a winner from the account with which you created
+                the event.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isAllowed" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="winner-cell">Name</th>
+                        <th class="winner-info-cell">{{ winner?.name || '?????????????' }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="winner-cell">Email</td>
+                        <td class="winner-info-cell">
+                            *********************
+                            <button (click)="copyEmailToClipboard()" id="clipboard-button" *ngIf="winner?.email">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="winner-cell">Message</td>
+                        <td class="winner-info-cell">{{ winner?.message | JsonParse }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button aria-label="Pick a winner" title="pick a winner" type="submit" id="pick-winner-button"
+                class="btn btn-primary" (click)="pickRandomWinner()">
+                Pick a lucky winner
+            </button>
+        </div>
+    </div>
+</div>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

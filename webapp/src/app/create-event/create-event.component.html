@@ -8,8 +8,9 @@
             If the problem persists, contact me at {{ contactAuthorText }}.
         </div>
         <div *ngIf="displayStatus === 'success'" class="display-status-success col-12">
-            Event created successfully, share the link: <br>
-            {{ eventUrl }}
+            Event created successfully,
+            <br> Share link: {{ eventUrl }}
+            <br> Pick winner: {{ winnerUrl }}
         </div>
         <div *ngIf="displayStatus === 'progress'" class="display-status-progress col-12">
             Sending request to server...
