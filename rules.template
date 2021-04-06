@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /giveaway/users/priviledged/{email} {
+      allow get: if email == authEmailHash();
+    }
+
+    match /giveaway/events/{code}/{event} {
+
+      match /participants/{email} {
+        allow read: if code == authEmailHash();
+        allow get, create, update: if email == authEmailHash();
+      }
+      allow create: if checkOrganizerPriviledge(code);
+    }
+
+    function checkOrganizerPriviledge(code) {
+      let path = /databases/$(database)/documents/giveaway/users/priviledged/$(authEmailHash());
+    	let user = get(path).data;
+      return user.organizer &&  authEmailHash() == code;
+    }
+
+    function authEmailHash() {
+    		return hashing.md5(request.auth.token.email.toUtf8()).toHexString();
+    }
+  }
+}
