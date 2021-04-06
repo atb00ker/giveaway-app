@@ -3,57 +3,41 @@
         <div class='offset-lg-1 col-lg-10 col-md-12'>
             <h3 class='mt-5'>About</h3>
             <p>
-                This is community project for making a database of internet service provider
-                categorized by postal code. The project stems from my personal terrible experience
-                of finding local providers, since local providers don't have very big wallets,
-                they don't spend on well advertisements, some of them don't even have
-                a website and some others just don't appear on search engines. Hence, this database can be
-                one-stop-shop for finding all providers operating in an area.
+                This project was made to enable some of the creators that I follow
+                (<a href="https://www.youtube.com/lowbudgetgamingyt">Low Budget Gaming</a> &
+                <a href="youtube.com/ShouldYouPlayIt">Should You Play It</a>)
+                to be able to do their giveaways without putting alot of effort into logistics.
             </p>
-            <h4 class='mt-4'>Adding Provider</h4>
-            <ul>
-                <li>
-                    As mentioned before, this is a community project and depends on
-                    people adding information in their pincode, if you know a provider
-                    in your area, please help others by logging in and adding the information
-                    of the provider.
-                </li>
-                <li>
-                    <b>Adding a provider in multiple pincodes:</b>
-                    If a provider operates in multiple regions, say an entire city or all
-                    major cities of a country, it wouldn't be practical to add them one by one for each pincode.
-                    For such cases, you can drop me a mail at #TODO
-                    with clearly stated list of postal codes where the provider operates and the
-                    other relevant information of the provider for me to add in the database.
-                    <br>
-                    <b>P.S:</b> It may take a while for me to take action, but eventually, I will do it.
-                </li>
-            </ul>
-            <h4 class='mt-4'>Modifying Provider</h4>
+            <h4 class='mt-4'>Creating an Event</h4>
             <p>
-                If there is some incorrect information about a provider or if you want to report
-                a provider that is no longer operating in a region, please drop me a mail at
-                #TODO and clearly mention
-                the name and pincode of the provider.
-                <br>
-                <b>P.S:</b> It may take a while for me to take action, but eventually, I will do it.
+                Unfortunately, I cannot let just anyone to create an event as this could promote
+                scammers to do their thing. So, If you want to host an event, you'll need contact
+                me at {{ contactAuthorText }} <email-copy-icon></email-copy-icon>.
             </p>
             <h4 class='mt-4'>Privacy</h4>
             <ul>
                 <li>
-                    <b>Guest users: No personal data is collected</b>
-                    <br> However right now, I am using Google Analytics to understand the response of the
-                    community. If the community likes the website and there are a couple of visitors / day
-                    on the website, I will consider this project to be worth my time and drop Google analytics
-                    as I don't have anything else to gain from it.
+                    I am currently using Google Analytics to understand the usage of the website,
+                    Google Analytics captures information like the pages visited, type of device
+                    (mobile/desktop) and more. This information is used by me only in an aggregated
+                    manner to understand how many people are visiting the website and from which
+                    country so that I can scale up the servers in future according to the requirement.
                 </li>
                 <li>
-                    <b>Authenticated Users: Unique ID and email address is collected</b>
-                    <br> For users who login, a unique code associated with the account and the email address
-                    is retained. This is done to ensure that I can block a spammer filling wrong
-                    information in the database.
+                    When you login, your email address is saved in the Google Firebase
+                    Authentication database. You can ask me to delete your email address from
+                    the database at anytime, just drop me a mail at
+                    {{ contactAuthorText }} <email-copy-icon></email-copy-icon>.
+                </li>
+                <li>
+                    When you participate in an event, your name, message & email address is stored
+                    in Google Firestore database. This information is shared with the event host.
+                    (So that they can contact the lucky winner).
                 </li>
             </ul>
+            <p>
+                <b>It may take a while for me to reply, but I'll try to do it within 2-3 days.</b>
+            </p>
             <h4 class='mt-4'>Bugs & Contributions</h4>
             <p>
                 If you've found a bug, please checkout the repository of the project as
@@ -66,15 +50,12 @@
                 Please open an issue on GitHub to discuss the changes!
             </p>
             <h4 class='mt-4'>Open-Source</h4>
-            <p> This is an open-source project, the code can be found on GitHub: </p>
-            <ul>
-                <li>
-                    <a href='https://github.com/atb00ker/angular-isp-finder'> Frontend (Angular) </a>
-                </li>
-                <li>
-                    <a href='https://github.com/atb00ker/firebase-isp-finder'> Backend (Firebase) </a>
-                </li>
-            </ul>
+            <p>
+                This is an open-source project,
+                <a href="https://github.com/atb00ker/online-giveaway-organizer">the code for this site </a>
+                can be found on GitHub.
+            </p>
+
             <h4 class='mt-4'>License</h4>
             The <a href='https://github.com/atb00ker/angular-isp-finder'> Frontend (Angular) </a>
             and the <a href='https://github.com/atb00ker/firebase-isp-finder'> Backend (Firebase) </a>
@@ -84,9 +65,12 @@
             <a href='https://commons.wikimedia.org/wiki/File:ALiAS_Logo.png'>@parthsharma2</a> under
             <b>CC BY-SA License</b>.
             <br>
-            <!-- TODO: Remove after jquery & bootstrap are removed -->
-            License of dependencies like Angular, Bootstrap & jQuery is mentioned in the documentation of
-            the dependency itself.
+            Images used in the site are from <a href="https://www.freepik.com/">Freepik</a> &
+            <a href="https://2.flexiple.com/scale/all-illustrations">Scale</a> and their license information
+            is available at the respective sites.
+            <br>
+            License of dependencies like Angular, & Bootstrap and nodejs dependencies are mentioned in
+            the documentation of the dependencies itself.
         </div>
     </div>
 </div>
