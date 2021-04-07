@@ -49,8 +49,12 @@ export class CreateEventComponent implements OnInit {
       .subscribe(
         response => {
           this.user = response.data();
-          this.displayStatus = 'normal';
-          this.isAllowed = true;
+          if (this.user.organizer) {
+            this.isAllowed = true;
+            this.displayStatus = 'normal';
+          } else {
+            this.displayStatus = 'error';
+          }
         },
         error => {
           this.displayStatus = 'error';

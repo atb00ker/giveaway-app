@@ -1,27 +1,31 @@
 <nav class="navbar navbar-expand-md nav-color navbar-dark">
     <a class="navbar-brand" [routerLink]=[HOME_PATH]>Giveaway</a>
     <button aria-label="Collapse Navigation Bar" class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#collapsibleNavbar">
+        data-target="#collapsibleNavbar" (click)="isMenuCollapsed = !isMenuCollapsed">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" [attr.id]="collapseEnabled">
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" data-target="#collapsibleNavbar"
-                    [routerLink]=[HOME_PATH]>Home</a>
+                    (click)="isMenuCollapsed = true" [routerLink]=[HOME_PATH]>Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" data-target="#collapsibleNavbar"
-                    [routerLink]=[ABOUT_PATH]>About</a>
+                    (click)="isMenuCollapsed = true" [routerLink]=[ABOUT_PATH]>About</a>
             </li>
             <li *ngIf="userInfo && userInfo!='loading'" class="d-none d-md-flex nav-item">
-                <a [routerLink]=[CREATE_EVENT_PATH]>
-                    <button aria-label="Create Giveaway" type="button" class="btn btn-primary">Create Giveaway</button>
+                <a (click)="isMenuCollapsed = true" [routerLink]=[CREATE_EVENT_PATH]>
+                    <button aria-label="Create Giveaway" type="button" class="btn btn-primary">
+                        Create Giveaway
+                    </button>
                 </a>
             </li>
             <li *ngIf="userInfo && userInfo!='loading'" class="d-block d-md-none nav-item" data-toggle="collapse"
                 data-target="#collapsibleNavbar">
-                <a class="nav-link" [routerLink]=[CREATE_EVENT_PATH]>Create Giveaway</a>
+                <a (click)="isMenuCollapsed = true" class="nav-link" [routerLink]=[CREATE_EVENT_PATH]>
+                    Create Giveaway
+                </a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
