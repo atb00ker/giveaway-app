@@ -23,5 +23,3 @@ npm install -g angular-cli-ghpages
 
 - Build: `ng build --prod --base-href https://atb00ker.github.io/giveaway-app/`
 - Deploy: `ngh --dir dist/giveaway/`
-
-

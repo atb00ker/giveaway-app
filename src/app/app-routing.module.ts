@@ -1,20 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFireAuthGuard, redirectUnauthorizedTo, canActivate } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 // Components
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { EventComponent } from './event/event.component';
 import { PickEventWinnerComponent } from './pick-event-winner/pick-event-winner.component';
-
-export class AppRoutes {
-  public static home = 'home';
-  public static about = 'about';
-  public static createEvent = 'create-event';
-  public static event = 'giveaway';
-  public static pickEventWinner = 'pick-winner';
-}
+import { AppRoutes } from './app.routes';
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo([AppRoutes.home]);
 

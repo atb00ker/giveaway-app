@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Component, NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PathLocationStrategy } from '@angular/common';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -59,7 +60,8 @@ export class AppComponent {
   providers: [
     AuthService,
     ScreenTrackingService,
-    UserTrackingService
+    UserTrackingService,
+    PathLocationStrategy
   ],
   bootstrap: [AppComponent]
 })

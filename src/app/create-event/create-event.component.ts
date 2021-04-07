@@ -10,6 +10,7 @@ import { ApiService } from '../api.service';
 import { HelperService } from '../helper.service';
 import { User } from '../app.interface';
 import { NgbToastsService } from '../ngbootstrap/ngtoasts.service';
+import { AppRoutes } from '../app.routes';
 
 @Component({
   selector: 'app-create-event',
@@ -66,8 +67,9 @@ export class CreateEventComponent implements OnInit {
     let randomEventId = this.helper.getUrlSafeRandomString(21);
     this.api.createEvent(email, this.eventName.value, randomEventId)
       .then(() => {
-        this.eventUrl = `${location.origin}/giveaway?code=${email}&event=${randomEventId}`;
-        this.winnerUrl = `${location.origin}/pick-winner?code=${email}&event=${randomEventId}`;
+        const parameters = `?code=${email}&event=${randomEventId}`;
+        this.eventUrl = this.helper.joinToBaseUrl(`${AppRoutes.event}${parameters}`);
+        this.winnerUrl = this.helper.joinToBaseUrl(`${AppRoutes.pickEventWinner}${parameters}`);
         this.displayStatus = 'success';
       })
       .catch(error => {

@@ -1,5 +1,5 @@
 import { HostListener, Component, OnInit } from '@angular/core';
-import { AppRoutes } from '../app-routing.module';
+import { AppRoutes } from '../app.routes';
 import { AuthService } from '../auth.service';
 import { HelperService } from '../helper.service';
 

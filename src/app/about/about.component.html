@@ -8,11 +8,21 @@
                 <a href="youtube.com/ShouldYouPlayIt">Should You Play It</a>)
                 to be able to organize giveaway without putting alot of effort into logistics.
             </p>
-            <h4 class='mt-4'>Creating an Event</h4>
+            <h4 class='mt-4'>Creating Event</h4>
             <p>
                 Unfortunately, I cannot let just anyone to create an event as this could promote
                 scammers to do their thing. So, If you want to host an event, you'll need contact
                 me at {{ contactAuthorText }} <email-copy-icon></email-copy-icon>.
+            </p>
+            <h4 class='mt-4'>How can we trust the results are random?</h4>
+            <p>
+                People and documentation lie but code never lies,
+                <a
+                    href="https://github.com/atb00ker/giveaway-app/blob/main/src/app/pick-event-winner/pick-event-winner.component.ts#L85-L97">
+                    checkout the code of the function that picks the winner</a>.
+                You don't need to be a developer to understand it, I have explained it in
+                detail. This function doesn't run on server but on the browser of the person
+                drawing winners, so no worries about tampering.
             </p>
             <h4 class='mt-4'>Privacy</h4>
             <ul>
@@ -57,9 +67,8 @@
             </p>
 
             <h4 class='mt-4'>License</h4>
-            The <a href='https://github.com/atb00ker/angular-isp-finder'> Frontend (Angular) </a>
-            and the <a href='https://github.com/atb00ker/firebase-isp-finder'> Backend (Firebase) </a>
-            are under <b>MIT License</b>.
+            The <a href='https://github.com/atb00ker/giveaway-app'> Frontend (Angular) </a>
+            is under <b>MIT License</b>.
             <br>
             The site favicon of the website is contributed by
             <a href='https://commons.wikimedia.org/wiki/File:ALiAS_Logo.png'>@parthsharma2</a> under
